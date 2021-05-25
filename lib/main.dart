@@ -49,23 +49,15 @@ class _StoryPageState extends State<StoryPage> {
               ),
               Expanded(
                 flex: 2,
-                child: TextButton(
+                child: ChoiceButton(
                   onPressed: () {
                     //Choice 1 made by user.
                     setState(() {
                       storyBrain.nextStory(1);
                     });
                   },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.red),
-                  ),
-                  child: Text(
-                    storyBrain.getChoice1(),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                    ),
-                  ),
+                  backgroundColor: Colors.red,
+                  text: storyBrain.getChoice(1),
                 ),
               ),
               SizedBox(
@@ -74,7 +66,7 @@ class _StoryPageState extends State<StoryPage> {
               Expanded(
                 flex: 2,
                 child: Visibility(
-                    visible: storyBrain.buttonShouldBeVisible(),
+                  visible: storyBrain.buttonShouldBeVisible(),
                   child: TextButton(
                     onPressed: () {
                       //Choice 2 made by user.
@@ -86,7 +78,7 @@ class _StoryPageState extends State<StoryPage> {
                       backgroundColor: MaterialStateProperty.all(Colors.blue),
                     ),
                     child: Text(
-                      storyBrain.getChoice2(),
+                      storyBrain.getChoice(2),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
@@ -97,6 +89,25 @@ class _StoryPageState extends State<StoryPage> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget ChoiceButton(
+      {required void Function() onPressed,
+      required Color backgroundColor,
+      required String text}) {
+    return TextButton(
+      onPressed: onPressed,
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(backgroundColor),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20.0,
         ),
       ),
     );
