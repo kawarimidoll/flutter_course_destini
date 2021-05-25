@@ -49,12 +49,9 @@ class _StoryPageState extends State<StoryPage> {
               ),
               Expanded(
                 flex: 2,
-                child: ChoiceButton(
+                child: choiceButton(
                   onPressed: () {
-                    //Choice 1 made by user.
-                    setState(() {
-                      storyBrain.nextStory(1);
-                    });
+                    setState(() => storyBrain.nextStory(1));
                   },
                   backgroundColor: Colors.red,
                   text: storyBrain.getChoice(1),
@@ -67,23 +64,12 @@ class _StoryPageState extends State<StoryPage> {
                 flex: 2,
                 child: Visibility(
                   visible: storyBrain.buttonShouldBeVisible(),
-                  child: TextButton(
+                  child: choiceButton(
                     onPressed: () {
-                      //Choice 2 made by user.
-                      setState(() {
-                        storyBrain.nextStory(2);
-                      });
+                      setState(() => storyBrain.nextStory(2));
                     },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.blue),
-                    ),
-                    child: Text(
-                      storyBrain.getChoice(2),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                      ),
-                    ),
+                    backgroundColor: Colors.blue,
+                    text: storyBrain.getChoice(2),
                   ),
                 ),
               ),
@@ -94,7 +80,7 @@ class _StoryPageState extends State<StoryPage> {
     );
   }
 
-  Widget ChoiceButton(
+  Widget choiceButton(
       {required void Function() onPressed,
       required Color backgroundColor,
       required String text}) {
@@ -105,10 +91,7 @@ class _StoryPageState extends State<StoryPage> {
       ),
       child: Text(
         text,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20.0,
-        ),
+        style: TextStyle(color: Colors.white, fontSize: 20.0),
       ),
     );
   }
